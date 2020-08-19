@@ -7,7 +7,7 @@ import json
 
 def requestOrc(params):
     try: 
-        cred = credential.Credential("AKID3sgGZkoU2Jce08z7C2aDZdV5PRCf7q0u", "lkSv6TaT4PN4TaQ1L2RXM3TbokOkogHA") 
+        cred = credential.Credential("", "") 
         httpProfile = HttpProfile()
         httpProfile.endpoint = "ocr.tencentcloudapi.com"
 
