@@ -9,7 +9,7 @@ from config import splitDuration
 from frame_concat import concatFrames
 
 def getPicFrame():
-    videoDir = raw_input('输入视频路径: ')
+    videoDir = input('输入视频路径: ')
     path, filename = os.path.split(videoDir)
 
     if not filename.endswith(('.mp4', '.mkv', '.avi', '.wmv', '.iso', '.flv')):
@@ -17,7 +17,10 @@ def getPicFrame():
         return
     
     outputName = filename[0:-4]
-    
+
+    if not os.path.exists('./video'):
+        os.mkdir('./video')
+
     outputDir = './video/' + outputName
     frameOutputDir = outputDir + '/frames'
 
@@ -55,3 +58,7 @@ def getPicFrameMain():
     concatOutputDir = concatFrames(outputDir)
     print('------------ FINISH GET FRAMES ------------')
     return outputDir, concatOutputDir
+
+
+if __name__ == '__main__':
+    getPicFrameMain()

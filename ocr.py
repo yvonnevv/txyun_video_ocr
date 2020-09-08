@@ -1,24 +1,15 @@
 #-*- coding: UTF-8 -*-
-import sys
-import optparse
-import time
-import apiutil
-import base64
-import json
-import os
-import base64, hashlib, json, cv2, random, string, time
+import sys, base64, time, os
 from frame import getPicFrameMain
-from txyun_ocr import requestOrc
+from txyun_sdk import requestOrc
 
-from config import APP_ID, API_KEY, ratio
-
-app_key = API_KEY
-app_id = APP_ID
+from config import ratio
  
 def Recognise(img_path):
     with open(img_path, 'rb') as file:
         base64_data = base64.b64encode(file.read())
-    params = '{\"ImageBase64\":\"'+base64_data+'\"}'
+    params = '{\"ImageBase64\":\"'+base64_data.decode('utf8')+'\"}'
+    # print(params)
     rsp = requestOrc(params)
     # print rsp
     if rsp and rsp['TextDetections']:
@@ -29,9 +20,9 @@ def Recognise(img_path):
         return None
 
 def RecogniseAll():
-    # outputDir, concatOutputDir = getPicFrameMain()
-    outputDir = '/Users/chenxinyi/Documents/learn/py_aiplat_demo/video/第一部里面隐藏的那些彩蛋你找到了吗'
-    concatOutputDir = '/Users/chenxinyi/Documents/learn/py_aiplat_demo/video/第一部里面隐藏的那些彩蛋你找到了吗/concat'
+    outputDir, concatOutputDir = getPicFrameMain()
+    # outputDir = '/Users/chenxinyi/Documents/demo/learn/txyun_video_ocr/video/224157804-1-32'
+    # concatOutputDir = '/Users/chenxinyi/Documents/demo/learn/txyun_video_ocr/video/224157804-1-32/concat'
     
     start = int(time.time())
     print('-------------------------------')
@@ -53,6 +44,7 @@ def RecogniseAll():
 
         for item in recognise_dic:
               word = item['DetectedText'].encode('utf8').strip()
+              word = word.decode('utf8')
               if word != '' and word not in allWords:
                   print('-------- KEYWORD %s --------'%(word))
                   allWords.append(word)

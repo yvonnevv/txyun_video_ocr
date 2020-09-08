@@ -24,7 +24,7 @@ def concatFrames(outputDir):
         crop_im = im[int((1 - ratio) * height):height, 0:width]
         c_index = index//concat_num
         if len(concat_imgs) < c_index + 1:
-            print 'c_index', c_index
+            print('c_index', c_index)
             concat_imgs.append([])
 
         concat_imgs[c_index].append(crop_im)

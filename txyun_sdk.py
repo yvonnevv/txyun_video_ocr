@@ -4,10 +4,11 @@ from tencentcloud.common.profile.http_profile import HttpProfile
 from tencentcloud.common.exception.tencent_cloud_sdk_exception import TencentCloudSDKException 
 from tencentcloud.ocr.v20181119 import ocr_client, models 
 import json
+from config import SECRET_ID, SECRET_KEY
 
 def requestOrc(params):
     try: 
-        cred = credential.Credential("", "") 
+        cred = credential.Credential(SECRET_ID, SECRET_KEY) 
         httpProfile = HttpProfile()
         httpProfile.endpoint = "ocr.tencentcloudapi.com"
 
@@ -23,4 +24,4 @@ def requestOrc(params):
         # print 
 
     except TencentCloudSDKException as err: 
-        print err 
+        print(err) 
